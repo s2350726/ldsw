@@ -1,0 +1,270 @@
+@prefix : <http://www.semanticweb.org/user/ontologies/2024/3/university/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/user/ontologies/2024/3/university/> .
+
+<http://www.semanticweb.org/user/ontologies/2024/3/university> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#hasPart
+:hasPart rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#hasPart_Degree
+:hasPart_Degree rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :hasPart ;
+                owl:inverseOf :partOf_Module ;
+                rdfs:domain :Degree ;
+                rdfs:range :Module .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#hasPart_Faculty
+:hasPart_Faculty rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :hasPart ;
+                 owl:inverseOf :partOf_Degree ;
+                 rdfs:domain :Faculty ;
+                 rdfs:range :Degree ,
+                            :Module .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#hasPart_University
+:hasPart_University rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :hasPart ;
+                    owl:inverseOf :partOf_Faculty ;
+                    rdfs:domain :University ;
+                    rdfs:range :Degree ,
+                               :Faculty ,
+                               :Module .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#hasRole
+:hasRole rdf:type owl:ObjectProperty ;
+         owl:inverseOf :roleOf ;
+         rdfs:domain :Person ;
+         rdfs:range :Role .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#partOf
+:partOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#partOf_Degree
+:partOf_Degree rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :partOf ;
+               rdfs:domain :Degree ;
+               rdfs:range :Faculty ,
+                          :University .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#partOf_Faculty
+:partOf_Faculty rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :partOf ;
+                rdfs:domain :Faculty ;
+                rdfs:range :University .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#partOf_Module
+:partOf_Module rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf :partOf ;
+               rdfs:domain :Module ;
+               rdfs:range :Degree ,
+                          :Faculty ,
+                          :University .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#roleOf
+:roleOf rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#studies
+:studies rdf:type owl:ObjectProperty ;
+         rdfs:domain :StudentRole ;
+         rdfs:range :Module .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#teaches
+:teaches rdf:type owl:ObjectProperty ;
+         rdfs:domain :LecturerRole ;
+         rdfs:range :Module .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#first_name
+:first_name rdf:type owl:DatatypeProperty ;
+            rdfs:domain :LecturerRole ,
+                        :Person ;
+            rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#last_name
+:last_name rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Person ;
+           rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#staffID
+:staffID rdf:type owl:DatatypeProperty ;
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :LecturerRole ;
+         rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#studentID
+:studentID rdf:type owl:DatatypeProperty ;
+           rdfs:domain :StudentRole ;
+           rdfs:range xsd:integer .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#CSModule
+:CSModule rdf:type owl:Class ;
+          rdfs:subClassOf :Module .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Degree
+:Degree rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Faculty
+:Faculty rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#LecturerRole
+:LecturerRole rdf:type owl:Class ;
+              rdfs:subClassOf :Role .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#MathModule
+:MathModule rdf:type owl:Class ;
+            rdfs:subClassOf :Module .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Module
+:Module rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Person
+:Person rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Role
+:Role rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#StudentRole
+:StudentRole rdf:type owl:Class ;
+             rdfs:subClassOf :Role .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#University
+:University rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Alice
+:Alice rdf:type owl:NamedIndividual ,
+                :Person ;
+       :hasRole :Lecturer1 ;
+       :first_name "Alice" ;
+       :last_name "Smith" .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Bob
+:Bob rdf:type owl:NamedIndividual ,
+              :Person ;
+     :hasRole :Student1 ;
+     :first_name "Bob" ;
+     :last_name "Winter" .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#CS101
+:CS101 rdf:type owl:NamedIndividual ,
+                :CSModule .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#CS103
+:CS103 rdf:type owl:NamedIndividual ,
+                :CSModule .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Carl
+:Carl rdf:type owl:NamedIndividual ,
+               :Person ;
+      :hasRole :Lecturer2 ,
+               :Student2 ;
+      :first_name "Carl" ;
+      :last_name "Bloem" .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Lecturer1
+:Lecturer1 rdf:type owl:NamedIndividual ,
+                    :LecturerRole ;
+           :teaches :CS103 ,
+                    :M201 ;
+           :staffID 417686 .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Lecturer2
+:Lecturer2 rdf:type owl:NamedIndividual ,
+                    :LecturerRole ;
+           :teaches :CS101 ,
+                    :M204 ;
+           :staffID 819280 .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#M201
+:M201 rdf:type owl:NamedIndividual ,
+               :MathModule .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#M204
+:M204 rdf:type owl:NamedIndividual ,
+               :MathModule .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Student1
+:Student1 rdf:type owl:NamedIndividual ,
+                   :StudentRole ;
+          :studies :CS101 ,
+                   :CS103 ,
+                   :M204 ;
+          :studentID 123456 .
+
+
+###  http://www.semanticweb.org/user/ontologies/2024/3/university#Student2
+:Student2 rdf:type owl:NamedIndividual ,
+                   :StudentRole ;
+          :studies :M201 ,
+                   :M204 ;
+          :last_name 654321 .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CSModule
+                :LecturerRole
+                :MathModule
+                :StudentRole
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
